@@ -48,7 +48,7 @@
       display: none!important;
     }
     .container { max-width: 900px; margin: 0 auto; }
-    #form-container {
+    #form-container-caio {
       background: var(--panel);
       border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -112,7 +112,7 @@
 
   <div class="container">
     
-    <div id="form-container">
+    <div id="form-container-caio">
       <fieldset>
         <legend>Informações do Pedido</legend>
         <div class="grid-2">
@@ -177,7 +177,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       
-      const form = document.getElementById('form-container');
+      const form = document.getElementById('form-container-caio');
       const copyBtn = document.getElementById('copy-btn');
       const outputArea = document.getElementById('output-code');
       const allInputs = form.querySelectorAll('input, textarea, select');

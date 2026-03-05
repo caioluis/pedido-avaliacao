@@ -30,6 +30,23 @@
       padding: 20px;
       min-height: 100vh;
     }
+    .post-content:has(iframe.pedido-avaliacao) {
+      line-height: 0.6;
+      margin-bottom: 0;
+      height: 100%;
+    }
+    .post-content:has(iframe.pedido-avaliacao) > strong {
+      display: none;
+    }
+    .post-content:has(iframe.pedido-avaliacao) > div.edited-message {
+      display: none;
+    }
+    .post:has(div iframe.pedido-avaliacao) {
+      padding: 0;
+    }
+    .post-content:has(iframe.pedido-avaliacao) br {
+      display: none;
+    }
     .container { max-width: 900px; margin: 0 auto; }
     #form-container {
       background: var(--panel);

@@ -211,14 +211,7 @@
       }
 
       const targetOrigin = 'https://goldenagejjkrpg.forumeiros.com';
-      
-      function sendHeight() {
-        const newHeight = document.documentElement.scrollHeight;
-        window.parent.postMessage({ frameHeight: newHeight }, targetOrigin);
-      }
-
-      const resizeObserver = new ResizeObserver(entries => { sendHeight(); });
-      resizeObserver.observe(document.body);
+    
 
       function generateAndDisplayCode() {
         try {
@@ -270,7 +263,6 @@
         form.addEventListener('input', function() {
           generateAndDisplayCode();
           saveDataToLocalStorage();
-          sendHeight(); 
         });
 
         copyBtn.addEventListener('click', function() {
@@ -280,8 +272,7 @@
           copyBtn.textContent = 'Copiado!';
           setTimeout(() => { copyBtn.textContent = originalText; }, 2000);
         });
-        
-        setTimeout(sendHeight, 100);
+      
       }
 
       initialize();

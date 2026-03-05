@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerador de Pedidos de Avaliação - JJK RPG</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Roboto+Mono:wght@400;700&family=Yuji+Syuku&display=swap" rel="stylesheet">
-   
+  
   <style>
     :root {
       --bg: #0c0c1a;
@@ -21,7 +21,11 @@
       --glass-2: rgba(255, 255, 255, 0.02);
       --success: #00e091;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: var(--ui);
       background-color: var(--bg);
@@ -30,25 +34,11 @@
       padding: 20px;
       min-height: 100vh;
     }
-    .post-content:has(iframe.pedido-avaliacao) {
-      line-height: 0.6!important;
-      margin-bottom: 0!important;
-      height: 100%!important;
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
     }
-    .post-content:has(iframe.pedido-avaliacao) > strong {
-      display: none!important;
-    }
-    .post-content:has(iframe.pedido-avaliacao) > div.edited-message {
-      display: none!important;
-    }
-    .post:has(div iframe.pedido-avaliacao) {
-      padding: 0!important;
-    }
-    .post-content:has(iframe.pedido-avaliacao) br {
-      display: none!important;
-    }
-    .container { max-width: 900px; margin: 0 auto; }
-    #form-container-caio {
+    #form-container {
       background: var(--panel);
       border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -74,10 +64,23 @@
       padding: 0 10px;
       margin-left: 10px;
     }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    .input-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
+    .grid-2 { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 15px; 
+    }
+    .input-group { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 5px; 
+      margin-bottom: 10px; 
+    }
     label { 
-      font-weight: 500; font-size: 13px; color: var(--muted); text-transform: uppercase; font-family: var(--mono); 
+      font-weight: 500; 
+      font-size: 13px; 
+      color: var(--muted); 
+      text-transform: uppercase; 
+      font-family: var(--mono); 
     }
     input[type="text"], input[type="url"], textarea, select {
       background: var(--bg);
@@ -89,23 +92,66 @@
       font-size: 14px;
     }
     select { font-family: var(--mono); }
-    textarea { min-height: 80px; resize: vertical; }
-    .note { font-size: 12px; color: var(--muted); opacity: 0.8; margin-top: -5px; margin-bottom: 10px; }
+    textarea { 
+      min-height: 80px; 
+      resize: vertical; 
+    }
+    .note { 
+      font-size: 12px; 
+      color: var(--muted); 
+      opacity: 0.8; 
+      margin-top: -5px; 
+      margin-bottom: 10px; 
+    }
     #output-code {
-      width: 100%; height: 200px; background: var(--bg);
-      border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px;
-      color: var(--muted); font-family: var(--mono); font-size: 12px; resize: vertical; margin-bottom: 10px;
+      width: 100%;
+      height: 200px;
+      background: var(--bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 15px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      resize: vertical;
+      margin-bottom: 10px;
     }
     #copy-btn {
-      width: 100%; padding: 12px; border: none; border-radius: 8px; background: var(--success);
-      color: var(--panel); font-size: 1em; font-family: var(--ui); font-weight: 700;
-      cursor: pointer; transition: background 0.2s;
+      width: 100%; 
+      padding: 12px; 
+      border: none; 
+      border-radius: 8px; 
+      background: var(--success);
+      color: var(--panel); 
+      font-size: 1em; 
+      font-family: var(--ui); 
+      font-weight: 700;
+      cursor: pointer; 
+      transition: background 0.2s;
     }
-    #copy-btn:hover { background: #00ffaa; }
-    textarea::-webkit-scrollbar { width: 8px; }
-    textarea::-webkit-scrollbar-track { background: var(--panel); }
-    textarea::-webkit-scrollbar-thumb { background-color: var(--accent1); border-radius: 8px; }
-    @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } body { padding: 10px; } }
+    #copy-btn:hover { 
+      background: #00ffaa; 
+    }
+    
+    textarea::-webkit-scrollbar { 
+      width: 8px; 
+    }
+    textarea::-webkit-scrollbar-track { 
+      background: var(--panel); 
+    }
+    textarea::-webkit-scrollbar-thumb { 
+      background-color: var(--accent1); 
+      border-radius: 8px; 
+    }
+    
+    @media (max-width: 600px) {
+      .grid-2 { 
+        grid-template-columns: 1fr; 
+      }
+      body {
+        padding: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -131,11 +177,10 @@
             <label for="f-tipo">Tipo de Atividade</label>
             <select id="f-tipo">
               <option value="Missão">Missão</option>
-              <option value="Ocorrência">Ocorrência (Patrulha)</option> <option value="Quest">Quest</option>
+              <option value="Quest">Quest</option>
               <option value="Evento">Evento</option>
               <option value="Treino">Treino</option>
             </select>
-            <div id="ocorrencia-note" class="note" style="display:none; color: var(--success);">Ocorrências são sempre Solo e Maldições fáceis. Recompensa Fixa.</div>
           </div>
           <div class="input-group">
             <label for="f-grau">Grau/Nível da Atividade</label>
@@ -152,7 +197,7 @@
         
         <div class="input-group">
           <label for="f-link">Link da Atividade</label>
-          <input type="url" id="f-link" placeholder="https://... (cole apenas a URL)">
+          <input type="url" id="f-link" placeholder="https://... (cole apenas a URL, será formatada automaticamente)">
           <div class="note">Apenas cole a URL, o link será formatado automaticamente como "Clique aqui"</div>
         </div>
         
@@ -175,26 +220,16 @@
   </div>
 
   <script>
+    // --- SCRIPT PRINCIPAL ---
     document.addEventListener('DOMContentLoaded', function() {
       
       const form = document.getElementById('form-container-caio');
       const copyBtn = document.getElementById('copy-btn');
       const outputArea = document.getElementById('output-code');
       const allInputs = form.querySelectorAll('input, textarea, select');
-      const tipoSelect = document.getElementById('f-tipo');
-      const ocorrenciaNote = document.getElementById('ocorrencia-note');
-      const storageKey = 'pedidoAvaliacaoData_v2'; // Atualizei a versão
+      const storageKey = 'pedidoAvaliacaoData_v1';
 
-      // Mostra nota se for Ocorrência
-      tipoSelect.addEventListener('change', function() {
-        if (this.value === 'Ocorrência') {
-            ocorrenciaNote.style.display = 'block';
-        } else {
-            ocorrenciaNote.style.display = 'none';
-        }
-        generateAndDisplayCode();
-      });
-
+      // --- FUNÇÕES UTILITÁRIAS ---
       function getVal(id) { 
         const element = document.getElementById(id);
         return element ? element.value.trim() : ''; 
@@ -210,16 +245,7 @@
         return str.replace(/"/g, "&quot;"); 
       }
 
-      const targetOrigin = 'https://goldenagejjkrpg.forumeiros.com';
-      
-      function sendHeight() {
-        const newHeight = document.documentElement.scrollHeight;
-        window.parent.postMessage({ frameHeight: newHeight }, targetOrigin);
-      }
-
-      const resizeObserver = new ResizeObserver(entries => { sendHeight(); });
-      resizeObserver.observe(document.body);
-
+      // --- GERAÇÃO DO CÓDIGO ---
       function generateAndDisplayCode() {
         try {
           const jogador = escapeHTML(getVal('f-jogador'));
@@ -230,6 +256,7 @@
           const participantes = escapeHTML(getVal('f-participantes'));
           const objetivo = escapeHTML(getVal('f-objetivo'));
 
+          // Template com sistema de status e link formatado
           const codigoTemplate = `<link href="https://gaaaaaaaaabs.github.io/goldenagerepositor.io/combate.css" rel="stylesheet" type="text/css"> <div class="avaliacao-request"> <div class="avaliacao-header"> <div class="avaliacao-title"> <h3>PEDIDO DE AVALIAÇÃO</h3> <span class="avaliacao-status" data-status="1">Status: Aguardando Avaliação</span> </div> </div> <div class="avaliacao-content"> <div class="avaliacao-field"> <span class="avaliacao-label">Jogador:</span> <span class="avaliacao-value">${jogador || 'SeuNomeAqui'}</span> </div> <div class="avaliacao-field"> <span class="avaliacao-label">Personagem:</span> <span class="avaliacao-value">${personagem || 'NomeDoPersonagem'}</span> </div> <div class="avaliacao-field"> <span class="avaliacao-label">Tipo de Atividade:</span> <span class="avaliacao-value">${tipo || 'Tipo de Atividade'}</span> </div> <div class="avaliacao-field"> <span class="avaliacao-label">Grau/Nível:</span> <span class="avaliacao-value">${grau || 'Grau da Atividade'}</span> </div> <div class="avaliacao-field"> <span class="avaliacao-label">Link da Atividade:</span> <span class="avaliacao-value">${link ? '[url=' + link + ']Clique aqui[/url]' : 'Nenhum link fornecido'}</span> </div> <div class="avaliacao-field"> <span class="avaliacao-label">Participantes:</span> <span class="avaliacao-value">${participantes || 'Lista de participantes'}</span> </div> <div class="avaliacao-field full-width"> <span class="avaliacao-label">Objetivo:</span> <span class="avaliacao-value">${objetivo || 'Objetivo da atividade...'}</span> </div> </div> <div class="avaliacao-footer"> <div class="avaliacao-master"> <b>Avaliador Responsável:</b> <span style="color: #82b1ff;">Aguardando designação</span> </div> <div class="avaliacao-notes"> <b>Feedback do Avaliador:</b> <span style="color: #82b1ff;">Aguardando avaliação.</span> </div> </div> </div> <style> .avaliacao-request { background: linear-gradient(135deg, #1a1a2e 0%, #0c0c1a 100%); border: 2px solid #2979ff; border-radius: 10px; margin: 15px 0; overflow: hidden; color: #e7e9ff; font-family: Arial, sans-serif; } .avaliacao-header { background: rgba(41, 121, 255, 0.2); padding: 15px 20px; border-bottom: 1px solid #333; } .avaliacao-title { display: flex; justify-content: space-between; align-items: center; } .avaliacao-title h3 { margin: 0; color: #82b1ff; font-size: 1.3em; } .avaliacao-status { background: #2979ff; color: white; padding: 5px 10px; border-radius: 4px; font-size: 0.9em; font-weight: bold; } .avaliacao-content { padding: 20px; } .avaliacao-field { display: flex; margin-bottom: 12px; align-items: flex-start; } .avaliacao-field.full-width { flex-direction: column; } .avaliacao-label { font-weight: bold; width: 140px; flex-shrink: 0; color: #bfc6e6; } .avaliacao-value { color: #82b1ff; flex: 1; } .avaliacao-field.full-width .avaliacao-value { margin-top: 5px; background: rgba(0, 0, 0, 0.2); padding: 10px; border-radius: 4px; border-left: 3px solid #2979ff; } .avaliacao-footer { background: rgba(0, 0, 0, 0.3); padding: 12px 20px; border-top: 1px solid #333; text-align: center; } .avaliacao-master { color: #bfc6e6; font-size: 0.95em; margin-bottom: 8px; } .avaliacao-notes { color: #bfc6e6; font-size: 0.95em; } </style>`;
 
           outputArea.value = codigoTemplate;
@@ -240,6 +267,7 @@
         }
       }
       
+      // --- SALVAMENTO LOCAL ---
       function saveDataToLocalStorage() {
         const data = {};
         allInputs.forEach(input => {
@@ -260,17 +288,21 @@
               }
             });
           }
-        } catch (e) { console.log('Nenhum dado salvo encontrado'); }
+        } catch (e) {
+          console.log('Nenhum dado salvo encontrado');
+        }
         generateAndDisplayCode();
       }
 
+      // --- INICIALIZAÇÃO ---
       function initialize() {
+        // Carrega dados salvos
         loadDataFromLocalStorage();
         
+        // Configura eventos
         form.addEventListener('input', function() {
           generateAndDisplayCode();
           saveDataToLocalStorage();
-          sendHeight(); 
         });
 
         copyBtn.addEventListener('click', function() {
@@ -278,14 +310,18 @@
           document.execCommand('copy');
           const originalText = copyBtn.textContent;
           copyBtn.textContent = 'Copiado!';
-          setTimeout(() => { copyBtn.textContent = originalText; }, 2000);
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+          }, 2000);
         });
         
-        setTimeout(sendHeight, 100);
       }
 
+      // Inicializa a aplicação
       initialize();
+
     });
   </script>
+  <script src="/node_modules/@iframe-resizer/parent/index.umd.js"></script>
 </body>
 </html>
